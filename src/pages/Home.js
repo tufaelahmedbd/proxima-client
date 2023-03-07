@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import ProjectDetails from "../components/ProjectDetails";
+import ProjectForm from "../components/ProjectForm";
 const Home = () => {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -33,7 +34,9 @@ const Home = () => {
           ))}
         </div>
       </div>
-      <div className="right"></div>
+      <div className="right">
+        <ProjectForm />
+      </div>
     </div>
   );
 };
