@@ -10,6 +10,36 @@ const ProjectForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    //data
+    const project = { title, tech, budget, duration, manager, dev };
+
+    //post req
+    const res = await fetch("http://localhost:5000/api/projects", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(project),
+    });
+    const json = await res.json();
+
+    //!res.ok error
+    if (!res.ok) {
+      setError(json.error);
+    }
+
+    //res.ok reset
+    if (res.ok) {
+      setTitle("");
+      setTech("");
+      setBudget("");
+      setDuration("");
+      setManager("");
+      setDev("");
+      setError(null);
+      console.log("new project add to db", json);
+    }
   };
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-5">
@@ -125,6 +155,7 @@ const ProjectForm = () => {
       >
         Add Project
       </button>
+      {error && <p>{error}</p>}
     </form>
   );
 };
