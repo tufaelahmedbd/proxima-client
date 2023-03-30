@@ -10,7 +10,7 @@ const Login = () => {
     e.preventDefault();
 
     //login user
-    await Login(email, password);
+    await login(email, password);
   };
   return (
     <form
@@ -47,6 +47,11 @@ const Login = () => {
       >
         Log in
       </button>
+      {error && (
+        <p className="bg-rose-500/20 rounded-lg p-5 text-rose-500 border border-rose-500">
+          {error}
+        </p>
+      )}
     </form>
   );
 };
