@@ -17,7 +17,7 @@ const ProjectDetails = ({ project }) => {
     }
 
     const res = await fetch(
-      `http://localhost:5000/api/projects/${project._id}`,
+      `${process.env.REACT_APP_BASE_URL}/api/projects/${project._id}`,
       {
         method: "DELETE",
         headers: {
@@ -26,7 +26,9 @@ const ProjectDetails = ({ project }) => {
       }
     );
     const json = await res.json();
-    dispatch({ type: "DELETE_PROJECT", payload: json });
+    if (res.ok) {
+      dispatch({ type: "DELETE_PROJECT", payload: json });
+    }
   };
   const handleUpdate = () => {
     setIsModalOpen(true);
